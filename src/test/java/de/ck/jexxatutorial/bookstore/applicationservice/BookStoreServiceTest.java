@@ -64,7 +64,7 @@ class BookStoreServiceTest
     {
         //Arrange : Get the inbound port that we would like to test
         var bookStore = jexxaMain.getInstanceOfPort(BookStoreService.class);
-        ISBN13 isbn13 = new ISBN13("978-1-60309-265-4");
+        final ISBN13 isbn13 = new ISBN13("978-1-60309-265-4");
 
         boolean ergebnis = bookStore.inStock(isbn13);
 
@@ -72,14 +72,26 @@ class BookStoreServiceTest
     }
 
     @Test
-    public void addToStock()
+    public void testAddToStock()
     {
         //Arrange : Get the inbound port that we would like to test
         var bookStore = jexxaMain.getInstanceOfPort(BookStoreService.class);
-        ISBN13 isbn13 = new ISBN13("978-1-891830-99-3");
+        final ISBN13 isbn13 = new ISBN13("978-1-891830-99-3");
 
         bookStore.addToStock(Book.createBook(isbn13, 2));
 
         assertEquals(2, bookStore.get(isbn13).getAmount());
+    }
+
+    @Test
+    public void testSellBook()
+    {
+        //Arrange : Get the inbound port that we would like to test
+        var bookStore = jexxaMain.getInstanceOfPort(BookStoreService.class);
+        final ISBN13 isbn13 = new ISBN13("978-1-60309-265-4");
+        bookStore.sellBook(isbn13);
+
+        assertEquals(3, bookStore.get(isbn13).getAmount());
+
     }
 }

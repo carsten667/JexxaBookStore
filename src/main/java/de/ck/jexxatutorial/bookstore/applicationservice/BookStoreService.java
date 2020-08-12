@@ -42,8 +42,9 @@ public class BookStoreService
         bookRepository.add(book);
     }
 
-    public void sellBook(final Book book)
+    public void sellBook(final ISBN13 isbn13)
     {
+        Book book = get(isbn13);
         final Optional<BookSoldOut> bookSoldOut = book.sellBook();
 
         if (bookSoldOut.isPresent())
