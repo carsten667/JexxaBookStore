@@ -38,6 +38,7 @@ public class BookStoreService
 
     public void addToStock(final Book book)
     {
+
         bookRepository.add(book);
     }
 
@@ -51,5 +52,9 @@ public class BookStoreService
         }
     }
 
+    public Book get(final ISBN13 isbn13)
+    {
+        return bookRepository.get(isbn13);
+    }
 
 }
