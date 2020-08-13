@@ -8,6 +8,7 @@ import io.jexxa.infrastructure.drivenadapterstrategy.persistence.imdb.IMDBReposi
 import io.jexxa.infrastructure.drivenadapterstrategy.persistence.jdbc.JDBCKeyValueRepository;
 import io.jexxa.infrastructure.drivingadapter.jmx.JMXAdapter;
 import io.jexxa.infrastructure.drivingadapter.rest.RESTfulRPCAdapter;
+import io.jexxa.utils.JexxaLogger;
 
 public final class BookStoreApplication
 {
@@ -51,9 +52,10 @@ public final class BookStoreApplication
     {
         if (isJDBCEnabled(args))
         {
+            JexxaLogger.getLogger(BookStoreApplication.class).info("Use persistence strategy: JDBCKeyValueRepository ");
             return JDBCKeyValueRepository.class;
         }
-
+        JexxaLogger.getLogger(BookStoreApplication.class).info("Use persistence strategy: IMDBRepository ");
         return IMDBRepository.class;
     }
 
